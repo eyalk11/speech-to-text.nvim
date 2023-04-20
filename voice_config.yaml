@@ -1,0 +1,9 @@
+default_engine: google
+default_args:
+  whisper:
+    language: english
+engines:
+  whisper: recognize_whisper
+  google: recognize_google
+  whisper-api: recognize_whisper_api
+
