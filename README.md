@@ -29,6 +29,16 @@ The enginename and params would be used for the next Voice/GetVoice call.
 This is just a tin wrapper around speech_recognition. So, you really want to check out its documentation . 
 Should work OOB with google recognize function. 
 
+## Mappings
+
+It doesn't add by default.
+
+You may use:
+```
+nmap <c-L> :Voice<CR>
+imap <C-L> <C-R>=GetVoice()<CR>
+```
+
 ## Credits
 
 https://vi.stackexchange.com/users/23502/vivian-de-smedt for helping out with replacing text. 
