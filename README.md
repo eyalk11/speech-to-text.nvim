@@ -20,6 +20,13 @@ pip install -r ~/.vim/plugged/nvim-voicerec/requirements.txt
 ```
 (Those are minimal requirements. It may need additional - see [speech_recognition](https://github.com/Uberi/speech_recognition))
 
+### Alternative 
+Try  
+```
+Plug 'eyalk11/nvim-voicerec', {'do': ':!python -m pip install -r ./requirements.txt \| :UpdateRemotePlugins'}
+```
+Should work, but couldn't confirm this due to unclear output by vim-plug. Possibly OS  dependet. 
+
 ## Usage
 
 It will add the 
