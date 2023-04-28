@@ -20,7 +20,7 @@ It will add the
 
 `GetVoice()` function - which returns text by speech
 
-`:Voice` command - which replaces the selected range with text (by speech). Gets the same parameters as the ConfigureVoice commmand. 
+`:Voice` which replaces the selected range with text (by speech). Gets the same parameters as the ConfigureVoice commmand. 
 
 `:ConfigureVoice [enginename] [paramsdic]` - which configures engine parameters (can also be done by yaml config). 
 The enginename and params would be used for the next Voice/GetVoice call. 
