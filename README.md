@@ -20,9 +20,10 @@ It will add the
 
 `GetVoice()` function - which returns text by speech
 
-`:Voice` command - which replaces the selected range with text (by speech).
+`:Voice` command - which replaces the selected range with text (by speech). Gets the same parameters as the ConfigureVoice commmand. 
 
-`:ConfigureVoice` - which configures engine parameters (can also be done by lua). 
+`:ConfigureVoice [enginename] [paramsdic]` - which configures engine parameters (can also be done by yaml config). 
+The enginename and params would be used for the next Voice/GetVoice call. 
 
 
 This is just a tin wrapper around speech_recognition. So, you really want to check out its documentation . 
