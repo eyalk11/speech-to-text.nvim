@@ -13,9 +13,6 @@ Plug 'eyalk11/nvim-voicerec'
 pip install SpeechRecognition
 
 ```
-And follow more instuctions 
-
-
 
 ## Usage
 
