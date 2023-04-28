@@ -13,6 +13,9 @@ Plug 'eyalk11/nvim-voicerec'
 pip install SpeechRecognition
 
 ```
+And follow more instuctions 
+
+
 
 ## Usage
 
@@ -22,7 +25,11 @@ It will add the
 
 `:Voice` command - which replaces the selected range with text (by speech).
 
-`:ConfigureVoice` - which configures engine parameters (can also be done by lua).
+`:ConfigureVoice` - which configures engine parameters (can also be done by lua). 
+
+
+This is just a tin wrapper around speech_recognition. So, you really want to check out its documentation . 
+Should work OOB with google recognize function. 
 
 ## Credits
 
