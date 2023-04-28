@@ -4,6 +4,9 @@ You can select your favorite engine for STT: whisper, openai, google ...
 
 (will add support to all supported engines in speech_recognition soon)
 
+This is just a tin wrapper around speech_recognition. So, you really want to check out its documentation . 
+Should work OOB with google recognize function. 
+
 ## Installation
 
 Use
@@ -27,10 +30,6 @@ It will add the
 
 `:ConfigureVoice [enginename] [paramsdic]` - which configures engine parameters (can also be done by yaml config). 
 The enginename and params would be used for the next Voice/GetVoice call. 
-
-
-This is just a tin wrapper around speech_recognition. So, you really want to check out its documentation . 
-Should work OOB with google recognize function. 
 
 ## Mappings
 
