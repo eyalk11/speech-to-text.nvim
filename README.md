@@ -1,5 +1,7 @@
 # nvim-voicerec
-Neovim speech to text using [speech_recognition](https://github.com/Uberi/speech_recognition)
+Neovim speech to text using [speech_recognition](https://github.com/Uberi/speech_recognition). 
+You can select your favorite engine for stt whisper, openai, google (will add support to all supported engines in speech_recognition soon).
+
 
 ## Installation
 
