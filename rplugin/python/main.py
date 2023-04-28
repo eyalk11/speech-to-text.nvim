@@ -33,6 +33,10 @@ class SpeechToTextPlugin(object):
 
     @neovim.command("ConfigureVoice", range="", nargs="*", sync=True)
     def configure_params(self, args, range):
+        if len(args)==0:
+            self.nvim.out_write("Current engine is %s\n" % (self.engine,))
+            self.nvim.out_write( "params %s\n" %  (self.args,))
+            return
         eng = args[0]
         if not eng in self.engines:
             self.nvim.err_write("Error: engine not found\n")
