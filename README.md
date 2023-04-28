@@ -12,7 +12,7 @@ Plug 'eyalk11/nvim-voicerec'
 ```
 pip install -r ~/.vim/plugged/nvim-voicerec/requirements.txt
 ```
-(Those are minimal requirments. It may need additional - see [speech_recognition](https://github.com/Uberi/speech_recognition))
+(Those are minimal requirements. It may need additional - see [speech_recognition](https://github.com/Uberi/speech_recognition))
 
 ## Usage
 
