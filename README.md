@@ -1,5 +1,5 @@
 # nvim-voicerec
-Neovim text to speech using [speech_recognition](https://github.com/Uberi/speech_recognition)
+Neovim speech to text using [speech_recognition](https://github.com/Uberi/speech_recognition)
 
 ## Installation
 
