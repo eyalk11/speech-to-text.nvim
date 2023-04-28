@@ -10,9 +10,9 @@ Plug 'eyalk11/nvim-voicerec'
 (You might need to do `:UpdateRemotePlugins`)
 
 ```
-pip install SpeechRecognition
-
+pip install -r ~/.vim/plugged/nvim-voicerec/requirements.txt
 ```
+(Those are minimal requirments. It may need additional - see [speech_recognition](https://github.com/Uberi/speech_recognition))
 
 ## Usage
 
