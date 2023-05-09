@@ -11,13 +11,14 @@ import os
 DEFAULT_CONFIG_PATH =os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../voice_config.yaml")
 import nest_asyncio
 nest_asyncio.apply() #bad practice, but the situation is problematic
-
 @neovim.plugin
 class SpeechToTextPlugin(object):
     def __init__(self, nvim):
         self.nvim = nvim
         self.r = sr.Recognizer()
         self.engine=None
+        import debugpy
+        debugpy.listen(("localhost", 5678))
 
         try: 
             with open(DEFAULT_CONFIG_PATH) as f:
@@ -78,11 +79,18 @@ class SpeechToTextPlugin(object):
                 result = await task
                 return result
         finally:
-            pool.shutdown(wait=False)
+            pool.shutdown(wait=False,cancel_futures=True)
+            def run_me(pool):
+                try:
+                    pool.shutdown(wait=True)
+                except:
+                    pass
+
+            loop.run_in_executor(None,run_me,pool)
+        return None
 
     @neovim.command("Voice", range="", nargs="*", sync=True)
     def voice(self, args, rgn):
-        print('a')
         if len(args) > 0:
             self.configure_params(args, rgn)
         start_line, end_line = rgn
@@ -91,6 +99,7 @@ class SpeechToTextPlugin(object):
             text=self.get_voice()
         except Exception as e: 
             self.nvim.out_write("Error: %s\n" % e)
+            return
 
 
         if text is None or (len(text)==0):
@@ -124,18 +133,24 @@ class SpeechToTextPlugin(object):
                 # wait for a second to let the recognizer
                 # adjust the energy threshold based on
                 # the surrounding noise level
-                self.r.adjust_for_ambient_noise(source2, duration=0.4)
+                self.r.adjust_for_ambient_noise(source2, duration=0.2)
 
 
                 # Using google to recognize audio
 
                 def use_engine():
-                    #listens for the user's input
-                    audio2 = self.r.listen(source2)
-                    return self.engine(audio2, **self.args)
+                    try:
+                        #listens for the user's input
+                        audio2 = self.r.listen(source2)
+                        return self.engine(audio2, **self.args)
+                    except:
+                        pass
 
                 def wait_for_ended():
-                   keyboard.wait('esc')
+                    try:
+                       keyboard.wait('esc')
+                    except:
+                        pass
 
                 loop = asyncio.get_event_loop()
                 text= loop.run_until_complete(self.async_task_and_spin(wait_for_ended,use_engine,()))

@@ -1,9 +1,21 @@
-default_engine: google
+default_engine: whisper
 default_args:
   whisper:
     language: english
+  whisper-api:
+    api_key:
+    initial_prompt: As an AI agent, you must trascribe the voice exactly as you understand. You must assume it is in english and respond with English words only!
+  google-cloud:
+    credentials_json:
+
+
 engines:
   whisper: recognize_whisper
   google: recognize_google
   whisper-api: recognize_whisper_api
+  google-cloud: recognize_google_cloud
+  houndify: recognize_houndify
+  azure: recognize_azure
+  sphinx: recognize_sphinx
+  ibm: recognize_ibm
 
