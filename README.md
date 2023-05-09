@@ -14,13 +14,13 @@ Tested on windows only (but should work).
 
 Use
 ```
-Plug 'eyalk11/nvim-voicerec'
+Plug 'eyalk11/speech-to-text.nvim'
 ```
 
 And then: 
 
 ```
-!pip install -r ~/.vim/plugged/nvim-voicerec/requirements.txt
+!pip install -r ~/.vim/plugged/speech-to-text.nvim/requirements.txt
 :UpdateRemotePlugins
 ```
 (Those are minimal requirements. It may need additional - see [speech_recognition](https://github.com/Uberi/speech_recognition))
@@ -28,7 +28,7 @@ And then:
 ### Alternative 
 Try  
 ```
-Plug 'eyalk11/nvim-voicerec', {'do': ':!python -m pip install -r ./requirements.txt \| :UpdateRemotePlugins'}
+Plug 'eyalk11/speech-to-text.nvim', {'do': ':!python -m pip install -r ./requirements.txt \| :UpdateRemotePlugins'}
 ```
 Should work, but couldn't confirm this due to unclear output by vim-plug. Possibly OS  dependet. 
 Let me know if works.
