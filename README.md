@@ -41,10 +41,10 @@ It will add the
 
 `:Voice` which replaces the selected range with text (by speech). Gets the same parameters as the ConfigureVoice commmand. 
 
+You can cancel both voice commands by pressing esc.
+
 `:ConfigureVoice [enginename] [paramsdic]` - which configures engine parameters (can also be done by yaml config). 
 The enginename and params would be used for the next Voice/GetVoice call. 
-
-You can cancel both by pressing esc.
 
 ## Mappings
 
