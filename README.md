@@ -1,11 +1,13 @@
 # nvim-voicerec
-Neovim speech to text using [speech_recognition](https://github.com/Uberi/speech_recognition). 
-You can select your favorite engine for STT: whisper, openai, google ...
+Neovim plugin offer  speech to text capability using [speech_recognition](https://github.com/Uberi/speech_recognition). 
 
-(will add support to all supported engines in speech_recognition soon)
+You can select your favorite engine for speech-to-text : whisper, openai, google, azure etc.. 
+(All supported engines in speech recognition)
 
-This is just a tin wrapper around speech_recognition. So, you really want to check out its documentation . 
-Should work OOB with google recognize function. 
+This is basically a tin wrapper around speech_recognition. So, you really want to check out its documentation. 
+Should work OOB with whisper function. 
+
+Uses keyboard, which I think on linux requires admin. Tested on windows only (but should work).
 
 ## Installation
 
@@ -40,6 +42,8 @@ It will add the
 
 `:ConfigureVoice [enginename] [paramsdic]` - which configures engine parameters (can also be done by yaml config). 
 The enginename and params would be used for the next Voice/GetVoice call. 
+
+You can cancel both by pressing esc.
 
 ## Mappings
 
