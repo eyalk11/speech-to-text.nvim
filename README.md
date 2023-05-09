@@ -7,7 +7,8 @@ You can select your favorite engine for speech-to-text : whisper, openai, google
 This is basically a tin wrapper around speech_recognition. So, you really want to check out its documentation. 
 Should work OOB with whisper function. 
 
-Uses keyboard, which I think on linux requires admin. Tested on windows only (but should work).
+Uses keyboard package , which I think on linux requires admin. Luckily, only used for detection of ESC so ESC might not work. 
+Tested on windows only (but should work).
 
 ## Installation
 
