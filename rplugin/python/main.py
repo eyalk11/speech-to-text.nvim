@@ -1,12 +1,16 @@
 # Thanks https://vi.stackexchange.com/users/23502/vivian-de-smedt
 # for the help with the plugin.
+import keyboard
+import asyncio
 import yaml
 import neovim
 import speech_recognition as sr
+import concurrent.futures
 
 import os
 DEFAULT_CONFIG_PATH =os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../voice_config.yaml")
-
+import nest_asyncio
+nest_asyncio.apply() #bad practice, but the situation is problematic
 
 @neovim.plugin
 class SpeechToTextPlugin(object):
@@ -53,14 +57,44 @@ class SpeechToTextPlugin(object):
 
             self.engine = self.engines[eng]
             self.nvim.out_write("Engine set to %s\n" % eng)
+    @staticmethod
+    async def async_task_and_spin(wait_for_inp, some_task, args):
+        loop = asyncio.get_event_loop()
+        # Run the synchronous function in an executor
+        pool = concurrent.futures.ThreadPoolExecutor()
+
+        try:
+            task = loop.run_in_executor(pool, some_task, *args)
+            event_task = loop.run_in_executor(pool, wait_for_inp)
+            # Wait for the task or the event to complete
+            done, pending = await asyncio.wait(
+                {task, event_task}, return_when=asyncio.FIRST_COMPLETED
+            )
+            print('returned')
+            # Cancel any pending tasks
+            for t in pending:
+                t.cancel()
+            if task in done:
+                result = await task
+                return result
+        finally:
+            pool.shutdown(wait=False)
 
     @neovim.command("Voice", range="", nargs="*", sync=True)
     def voice(self, args, rgn):
+        print('a')
         if len(args) > 0:
             self.configure_params(args, rgn)
         start_line, end_line = rgn
 
-        text=self.get_voice() 
+        try:
+            text=self.get_voice()
+        except Exception as e: 
+            self.nvim.out_write("Error: %s\n" % e)
+
+
+        if text is None or (len(text)==0):
+            return
 
         lines = text.split("\r")
 
@@ -92,12 +126,23 @@ class SpeechToTextPlugin(object):
                 # the surrounding noise level
                 self.r.adjust_for_ambient_noise(source2, duration=0.4)
 
-                #listens for the user's input
-                audio2 = self.r.listen(source2)
 
                 # Using google to recognize audio
-                MyText = self.engine(audio2, **self.args) #r.recognize_google(audio2)
-                return MyText
+
+                def use_engine():
+                    #listens for the user's input
+                    audio2 = self.r.listen(source2)
+                    return self.engine(audio2, **self.args)
+
+                def wait_for_ended():
+                   keyboard.wait('esc')
+
+                loop = asyncio.get_event_loop()
+                text= loop.run_until_complete(self.async_task_and_spin(wait_for_ended,use_engine,()))
+
+                if text is None or (len(text)==0):
+                    return ""
+                return text
 
         except sr.RequestError as e:
             print("Could not request results; {0}".format(e))
