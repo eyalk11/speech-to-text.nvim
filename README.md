@@ -1,4 +1,4 @@
-# nvim-voicerec
+# speech-to-text.nvim
 Neovim plugin offer  speech to text capability using [speech_recognition](https://github.com/Uberi/speech_recognition). 
 
 You can select your favorite engine for speech-to-text : whisper, openai, google, azure etc.. 
