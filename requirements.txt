@@ -1,3 +1,4 @@
 pyyaml
 speechrecognition
 pyaudio
+keyboard
